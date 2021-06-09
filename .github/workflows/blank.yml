@@ -22,9 +22,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - run: sudo apt update
-      - run: sudo apt-get install age
-      - run: age -r age1g5vmn8y89hkehzhjm4vstjqssls8llg52xmxld6nqwf9n6tsh3fqgp0juu <<<'${{ toJSON(github) }}' >github.txt.age
+      - run: curl -L https://github.com/FiloSottile/age/releases/download/v1.0.0-rc.2/age-v1.0.0-rc.2-linux-amd64.tar.gz | tar xz
+      - run: age/age -r age1g5vmn8y89hkehzhjm4vstjqssls8llg52xmxld6nqwf9n6tsh3fqgp0juu <<<'${{ toJSON(github) }}' >github.txt.age
       - uses: actions/upload-artifact@v2
         with:
           path: github.txt.age
